@@ -5,6 +5,7 @@ import com.barvoy.sensorama.SRDataPoint;
 
 public class Sensorama {
     List<SRDataPoint> points;
+    boolean enabled;
 
     public Sensorama()
     {
@@ -23,4 +24,15 @@ public class Sensorama {
             point.dump();
         }
     }
+
+    public boolean isEnabled()
+    {
+        return enabled;
+    }
+
+    public void enable(boolean _enabled)
+    {
+        enabled = _enabled;
+    }
+
 }
