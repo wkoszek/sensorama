@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
 import com.barvoy.sensorama.Sensorama;
 import com.barvoy.sensorama.SRDataPoint;
@@ -47,7 +48,17 @@ public class MainActivity extends ActionBarActivity {
 
     public void recordingStartEnd(View view) {
         // Do something in response to button
-        System.out.println("recordingStartEnd");
+        Button buttonStartEnd = (Button) findViewById(view.getId());
+
+        String textCurrent = buttonStartEnd.getText().toString();
+
+        String textStart = "Start recording";
+        if (textCurrent.equals(textStart)) {
+            buttonStartEnd.setText("Stop recording");
+        } else {
+            buttonStartEnd.setText(textStart);
+        }
+
         SRDataPoint point = new SRDataPoint("sample");
         S.addPoint(point);
     }
