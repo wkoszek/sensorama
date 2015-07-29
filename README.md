@@ -116,3 +116,19 @@ Easy user interface would have to be provided however ('Do you want suppress
 GPS logging in 300ft radius from your current location?'), to make it more
 appealing to users to submit and share the data.
 
+# Serialization
+
+Data serialization is quite likely accomplished by writing samples data to
+the file. File should have easy to understand structure, so that easy
+parsing with Python or Ruby is possible. Some sort of CSV would work, yet it
+needs to be expressive enough to understand different sensor types. For
+example: self describing CSV could work, since one could run common set of
+utilities regardless of whether the phone had a given sensor or not.
+
+# Storage
+
+There should be a way to understand what the data consumption on a certain
+device will be. One of the units of measure could be number of MB per minute
+of monitoring. Its quite likely that compression might be necessary. Data
+should be recorder to the file which is either binary, or is a simple ASCII,
+so that the data compression can work in an efficient way.
