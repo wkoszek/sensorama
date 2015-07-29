@@ -50,9 +50,10 @@ Sensors vary greatly in ways in which they submit data. For example, the
 battery sensor may only send an update every couple of seconds, while the
 accelerometer may do it continually. While makes sense to capture the data
 from an accelerometer on a regular basis with short intervals, capturing the
-data from a battery every couple of milliseconds makes little sense. Thus it
-might be performed so that the data samples aren't uniform, meaning that the
-sample format can vary in between submissions.
+data from a battery every couple of milliseconds makes little sense. Thus
+data coming from a battery status sensor might be performed only on state
+change. In other words, design should support non-uniform data samples,
+meaning that the sample format can vary in between submissions.
 
 # Timestamping
 
@@ -72,3 +73,24 @@ known, in which case the wallclock time could be submitted only once. Every
 further sample could be either tagged with a 32-bit number, or maybe not
 tagged at all (implying that data arrives in order or that order doesn't
 matter).
+
+# Distribution
+
+Architecture should be granular enough to provide further distribution if
+necessary. For example, turning a simple battery reading status in Android
+Emulator resulted in a warning about inability to cope with the load of
+work put on the main thread. Thus it may require to decouple a core design
+from per-sensor gathering classes, so that multithreading can be included
+"for free". Another idea would be to provide a gateway into turning
+Sensorama into a distributed platform, where sensor data is submitted
+through BlueTooth
+
+# Data aggregation
+
+One can imagine the case where submitting individual data samples may become
+unnecessary, if algorithm to turn sensor data to a meaning is provided. In
+such cases Sensorama may need more aggregated sensor samples to run a
+clustering function on and to submit only an actual result of evalution of
+the data. For example, one may imagine a function which turns 5 individual
+battery sensors readouts to something like "Something start to eat battery
+very fast" signal.
