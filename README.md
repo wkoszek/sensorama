@@ -14,7 +14,7 @@ cross-platform mobile programming in Android and iOS ecosystems.
 
 # Introduction
 
-Sensors come in a wide variety of types, but the most popular are
+Sensors come in a wide variety of types, but the most popular are GPS,
 accelerometer, temperature, gravity, gyroscope and proximity sensors. All
 these sensors act as a smart A/D converters, in which MEMS chip translates
 analog singals from the environment to something modern processors can
@@ -94,3 +94,25 @@ clustering function on and to submit only an actual result of evalution of
 the data. For example, one may imagine a function which turns 5 individual
 battery sensors readouts to something like "Something start to eat battery
 very fast" signal.
+
+# Data confidentiality
+
+Sensorama in theory should handle all possible types of sensors, including
+location (GPS), audio (microphone) and video (camera). This such as these
+ones should be available to the user, so that one can decide whether to
+upload this data or not. For example, user may have recorded a valuable
+sample with a lot of accelerometer/gyroscope data, but may not be willing to
+share his location.
+
+# Filtering
+
+One could argue that for worthwhile data analysis, to be address all data
+samples should be present in raw form. Some sensors such as accelerometer or
+gyroscope are fine to be used in such context, yet anothers aren't. For
+example, user may want to include the GPS coordinates always unless they
+represent location of user's address, in which case GPS coordinates should
+be skipped. Filtering could be a partial answer to data confidentiality.
+Easy user interface would have to be provided however ('Do you want suppress
+GPS logging in 300ft radius from your current location?'), to make it more
+appealing to users to submit and share the data.
+
