@@ -1,5 +1,6 @@
 package com.barvoy.sensorama;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -14,17 +15,17 @@ import java.util.TimerTask;
 import com.barvoy.sensorama.Sensorama;
 import com.barvoy.sensorama.SRDataPoint;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
 
     public Sensorama S;
     public int sampleNumber;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        S = new Sensorama();
+        S = new Sensorama(this);
 
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
@@ -32,11 +33,13 @@ public class MainActivity extends ActionBarActivity {
             public void run() {
                 System.out.printf("en:%d %d", S.isEnabled() ? 1 : 0, sampleNumber);
                 System.out.println("");
+                if (S.isEnabled()) {
+                    S.capture();
+                }
                 sampleNumber++;
             }
         }, 0, 1000);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -76,9 +79,6 @@ public class MainActivity extends ActionBarActivity {
             S.enable(false);
             System.out.println("Stopped");
         }
-
-        SRDataPoint point = new SRDataPoint("sample");
-        S.addPoint(point);
     }
 
     public void recordingShare(View view) {
