@@ -1,13 +1,15 @@
 # Sensorama
 
-Sensorama is a data science experiment. Its purpose is to see if information
-gathered from modern sensors could be turned into understanding of real
-events from the sensor's place of origin.  For example, for the mobile cell
-phone which comes with accelerometer and a gyroscope, when enough sensor
-data is collected and analyzed, it could be interesting to see if Sensorama
-could detect activities such as jogging or playing drums. Interesting
-experiment could consist of a smartphone attach to a drummers arm and
-Sensorama being able to understand patterns played by the musician.
+Sensorama is a data science platform. Its purpose is to see if the
+information gathered from modern sensors could be turned into an
+understanding of real events from the sensor's place of origin.  For
+example, for the mobile cell phone which comes with an accelerometer and a
+gyroscope, when enough sensor data is collected and analyzed, it could be
+valuable to see if detection of activities such as jogging or playing drums
+is possible. Additional experiment could consist of a smart-phone attach to
+a drummers arm and Sensorama being able to understand patterns played by the
+musician.  Industrial sensor on the other hand may lead to conclusions about
+the state of machines such as CNC routers etc.
 
 Initial implementation of Sensorama is meant to be an exercise in mobile
 cross-platform mobile programming in Android and iOS ecosystems.
@@ -16,12 +18,12 @@ cross-platform mobile programming in Android and iOS ecosystems.
 
 Sensors come in a wide variety of types, but the most popular are GPS,
 accelerometer, temperature, gravity, gyroscope and proximity sensors. All
-these sensors act as a smart A/D converters, in which MEMS chip translates
-analog singals from the environment to something modern processors can
-understand. Software layer provides a way to enable the sensor, and later
-translates these events into numeric data which is provided through a sensor
-data source. Programs typically subscribe to these sources to get notified
-about the state change of the sensor.
+these sensors act as a smart A/D converters, in which that MEMS chip
+translates analog singals from the environment to something modern
+processors can understand. Software layer provides a way to enable the
+sensor, and later translates these events into a numeric data which is
+provided through the sensor data source. Programs typically subscribe to
+these sources to receive notification about the sensor state change.
 
 # Design
 
