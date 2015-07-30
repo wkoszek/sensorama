@@ -15,6 +15,8 @@
 	android:onClick="recordingStartEnd"
         android:layout_above="@+id/buttonShare"
         android:layout_marginBottom="55dp"
+        android:layout_alignRight="@+id/userDate"
+        android:layout_alignEnd="@+id/userDate"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -27,6 +29,43 @@
 	android:onClick="recordingShare"
         android:layout_alignParentBottom="true"
         android:layout_alignLeft="@+id/buttonStartEnd"
-        android:layout_alignStart="@+id/buttonStartEnd" />
+        android:layout_alignStart="@+id/buttonStartEnd"
+        android:layout_alignRight="@+id/userDate"
+        android:layout_alignEnd="@+id/userDate" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Your name"
+        android:ems="10"
+        android:id="@+id/userName"
+        android:layout_below="@+id/appName"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Sensorama"
+        android:id="@+id/appName"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/userDate"
+        android:text="Date"
+        android:layout_below="@+id/userName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/userName"
+        android:layout_alignEnd="@+id/userName" />
 
 </RelativeLayout>
