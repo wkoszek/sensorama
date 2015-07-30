@@ -8,6 +8,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -26,6 +30,8 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         S = new Sensorama(this);
+
+        sampleUpdateDate(sampleDateFmt() + "...");
 
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
@@ -74,16 +80,36 @@ public class MainActivity extends Activity {
             buttonStartEnd.setText("Stop recording");
             S.enable(true);
             System.out.println("Started");
+            sampleUpdateDate(sampleDateFmt());
         } else {
             buttonStartEnd.setText(textStart);
             S.enable(false);
             System.out.println("Stopped");
+            sampleUpdateDate(getSampleDate() + "-" + sampleDateFmt());
         }
     }
 
+    public String sampleDateFmt() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH.mm");
+        return sdf.format(new Date());
+    }
+
+    public String getSampleDate() {
+        TextView userDate = (TextView)findViewById(R.id.userDate);
+        return userDate.getText().toString();
+    }
+
+    public void sampleUpdateDate(String str) {
+        // Set the date of the start
+        TextView userDate = (TextView)findViewById(R.id.userDate);
+        userDate.setText(str);
+    }
+
+
     public void recordingShare(View view) {
         // Do something in response to button
-        System.out.println("recordingShare");
+        System.out.printf("recordingShare: %s\n", getSampleDate());
+
         S.dumpPoints();
     }
 }
