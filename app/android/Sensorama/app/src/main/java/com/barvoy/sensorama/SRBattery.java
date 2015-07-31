@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.BatteryManager;
 
-import com.barvoy.sensorama.Sensorama;
 
 public class SRBattery extends BroadcastReceiver {
     boolean batteryIsCharging;

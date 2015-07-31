@@ -1,19 +1,9 @@
 package com.barvoy.sensorama;
 
 import android.app.Activity;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
-import android.os.BatteryManager;
-import android.util.Log;
 
+import java.io.BufferedWriter;
 import java.util.*;
-import com.barvoy.sensorama.SRDataPoint;
 
 
 public class Sensorama {
@@ -38,9 +28,9 @@ public class Sensorama {
         points.add(list);
     }
 
-    public void dumpPoints() {
+    public void dumpPoints(BufferedWriter fo) {
         for (SRDataPointList list : points) {
-            list.dump();
+            list.dump(fo);
         }
     }
 

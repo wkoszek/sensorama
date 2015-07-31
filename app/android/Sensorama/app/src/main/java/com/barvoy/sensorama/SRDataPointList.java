@@ -1,5 +1,6 @@
 package com.barvoy.sensorama;
 
+import java.io.BufferedWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,9 +17,9 @@ public class SRDataPointList {
         sampleId++;
     }
 
-    public void dump() {
+    public void dump(BufferedWriter fo) {
         for (SRDataPoint point : dataPoints) {
-            point.dump();
+            point.dump(fo);
         }
     }
 }

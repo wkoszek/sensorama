@@ -1,10 +1,8 @@
 package com.barvoy.sensorama;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Environment;
 import android.os.StatFs;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,15 +10,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
-
-
-import com.barvoy.sensorama.Sensorama;
-import com.barvoy.sensorama.SRDataPoint;
 
 public class MainActivity extends Activity {
 
@@ -115,8 +111,15 @@ public class MainActivity extends Activity {
     public void recordingShare(View view) {
         // Do something in response to button
         System.out.printf("recordingShare: %s\n", getSampleDate());
-
-        S.dumpPoints();
+        File sampleFile = makeSampleFile(getSampleDate() + ".json");
+        try {
+            BufferedWriter fo = new BufferedWriter(new FileWriter(sampleFile));
+            fo.write("sampleDataContent");
+            S.dumpPoints(fo);
+            fo.close();
+        } catch (Exception e) {
+            SRDbg.l("Couldn't write data to a file:" +  e.toString());
+        }
     }
 
     public long spaceAvailableMB() {
@@ -147,5 +150,28 @@ public class MainActivity extends Activity {
         } else {
             SRDbg.l("SD isn't available");
         }
+    }
+
+    public String makeSampleStorageDir(String sampleFileName) {
+        File dir = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_DOCUMENTS), sampleFileName);
+        if (!dir.mkdirs()) {
+            SRDbg.l("Directory not created");
+        } else {
+            SRDbg.l("Directory created: " + dir.getAbsolutePath());
+        }
+        return dir.getAbsolutePath();
+    }
+
+    public File makeSampleFile(String fileName) {
+        String sampleDirPath = makeSampleStorageDir(SRCfg.addDirName);
+        String sampleFilePath = sampleDirPath + "/" + fileName;
+        File file = null;
+        try {
+            file = new File(sampleFilePath);
+        } catch (Exception e) {
+            SRDbg.l("Failed to create a file");
+        }
+        return file;
     }
 }
