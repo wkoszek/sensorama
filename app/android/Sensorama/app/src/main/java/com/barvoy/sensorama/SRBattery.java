@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.BatteryManager;
-import android.util.FloatMath;
 
 import com.barvoy.sensorama.Sensorama;
 
