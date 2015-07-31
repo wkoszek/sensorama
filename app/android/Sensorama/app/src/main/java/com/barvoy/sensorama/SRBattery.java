@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.BatteryManager;
+import android.util.FloatMath;
+
 import com.barvoy.sensorama.Sensorama;
 
 public class SRBattery extends BroadcastReceiver {
@@ -33,8 +35,9 @@ public class SRBattery extends BroadcastReceiver {
         batteryPercent = level / (float)scale;
     }
 
-    public void capture(Sensorama s) {
-        System.out.printf("SRBattery.capture()\n");
-        s.addPoint(new SRDataPoint("bat", batteryPercent, Sensorama.SR_DATAPOINT_BATTERY));
+    public void capture(SRDataPointList list) {
+        SRDataPoint point = new SRDataPoint("bat", new Float[]{ batteryPercent } );
+        SRDbg.l("bat:" + point.debugString());
+        list.add(point);
     }
 }

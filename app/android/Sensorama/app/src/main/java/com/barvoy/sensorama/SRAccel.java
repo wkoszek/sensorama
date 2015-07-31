@@ -37,8 +37,10 @@ public class SRAccel extends Activity implements SensorEventListener {
         vals[2] = event.values[2];
     }
 
-    public void capture(Sensorama s)
+    public void capture(SRDataPointList list)
     {
-        System.out.printf("%f %f %f ", vals[0], vals[1], vals[2]);
+        SRDataPoint point = new SRDataPoint("acc", new Float[]{ vals[0], vals[1], vals[2] } );
+        SRDbg.l("acc:" + point.debugString());
+        list.add(point);
     }
 }

@@ -20,33 +20,27 @@ public class Sensorama {
     SRAccel accel;
     SRBattery battery;
 
-    public static final int SR_DATAPOINT_BATTERY = 1;
-    public static final int SR_DATAPOINT_ACC = 2;
-
-    List<SRDataPoint> points;
+    List<SRDataPointList> points;
     boolean enabled;
 
-    public Sensorama(Activity activity)
+    public Sensorama(Activity activity, boolean debuggingEnabled)
     {
-        points = new ArrayList<SRDataPoint>();
+        SRDbg.debugEnable();
+        points = new ArrayList<SRDataPointList>();
         accel = new SRAccel(activity);
         battery = new SRBattery();
     }
 
-    public void addPoint(SRDataPoint point)
-    {
-        points.add(point);
-    }
-
     public void capture() {
-        battery.capture(this);
-        accel.capture(this);
+        SRDataPointList list = new SRDataPointList();
+        battery.capture(list);
+        accel.capture(list);
+        points.add(list);
     }
 
     public void dumpPoints() {
-
-        for (SRDataPoint point : points) {
-            point.dump();
+        for (SRDataPointList list : points) {
+            list.dump();
         }
     }
 

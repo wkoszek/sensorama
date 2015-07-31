@@ -29,7 +29,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        S = new Sensorama(this);
+        S = new Sensorama(this, false);
 
         sampleUpdateDate(sampleDateFmt() + "...");
 

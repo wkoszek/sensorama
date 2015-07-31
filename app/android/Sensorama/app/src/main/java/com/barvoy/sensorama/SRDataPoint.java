@@ -2,18 +2,36 @@ package com.barvoy.sensorama;
 
 public class SRDataPoint {
     String  prefix;
-    float   val;
+    Float[] points;
     int     what;
 
-    public SRDataPoint(String _prefix, float _val, int _what)
+    public SRDataPoint(String _prefix, Float []_points)
     {
         prefix = _prefix;
-        val = _val;
-        what = _what;
+        points = _points;
+    }
+
+    public String debugString() {
+        String s = "";
+
+        for (Float f : points) {
+            s += String.format("%f ", f);
+        }
+        s += "\n";
+        return s;
     }
 
     public void dump()
     {
-        System.out.printf("%s %f\n", prefix, val);
+        String s;
+        boolean isFirst;
+
+        System.out.printf("{ '%s' : [ ", prefix);
+        isFirst = true;
+        for (Float f : points) {
+            isFirst = false;
+            System.out.printf("%s%f", isFirst ? "" : ",", f);
+        }
+        System.out.printf("] }\n");
     }
 }
