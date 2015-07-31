@@ -2,6 +2,8 @@ package com.barvoy.sensorama;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Environment;
+import android.os.StatFs;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Timer;
@@ -28,6 +31,10 @@ public class MainActivity extends Activity {
     public final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        SRDbg.debugEnable();
+
+        storageDebug();
 
         S = new Sensorama(this, false);
 
@@ -105,11 +112,40 @@ public class MainActivity extends Activity {
         userDate.setText(str);
     }
 
-
     public void recordingShare(View view) {
         // Do something in response to button
         System.out.printf("recordingShare: %s\n", getSampleDate());
 
         S.dumpPoints();
+    }
+
+    public long spaceAvailableMB() {
+        StatFs stat = new StatFs(Environment.getExternalStorageDirectory().getPath());
+        long bytesAvailable = (long)stat.getBlockSize() *(long)stat.getBlockCount();
+        long availableMB = bytesAvailable / 1048576;
+        return availableMB;
+    }
+
+    public boolean isExternalStorageWritable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            return true;
+        }
+        return false;
+    }
+
+    public void storageDebug() {
+        if (!isExternalStorageWritable()) {
+            SRDbg.l("Can't write to external storage");
+        } else {
+            SRDbg.l("Storage detected");
+        }
+        SRDbg.l("Free storage: " + spaceAvailableMB());
+        Boolean isSDPresent = android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED);
+        if(isSDPresent) {
+            SRDbg.l("SD not available");
+        } else {
+            SRDbg.l("SD isn't available");
+        }
     }
 }
