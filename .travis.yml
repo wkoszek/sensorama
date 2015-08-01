@@ -1,0 +1,7 @@
+language: android
+jdk:
+- oraclejdk7
+- openjdk6
+script:
+- cd app/android/Sensorama
+- ./gradlew
