@@ -18,6 +18,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -37,7 +38,7 @@ public class MainActivity extends Activity {
 
         S = new Sensorama(this, false);
 
-        sampleUpdateDate(sampleDateFmt() + "...");
+        sampleUpdateDate(sampleDateFmt(SRCfg.dateFormat) + "...");
 
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
@@ -86,12 +87,12 @@ public class MainActivity extends Activity {
             buttonStartEnd.setText("Stop recording");
             S.enable(true);
             System.out.println("Started");
-            sampleUpdateDate(sampleDateFmt());
+            sampleUpdateDate(sampleDateFmt(SRCfg.dateFormat));
         } else {
             buttonStartEnd.setText(textStart);
             S.enable(false);
             System.out.println("Stopped");
-            sampleUpdateDate(getSampleDate() + "-" + sampleDateFmt());
+            sampleUpdateDate(getSampleDate() + "-" + sampleDateFmt(SRCfg.timeFormat));
             recordingShare();
         }
     }
@@ -113,8 +114,8 @@ public class MainActivity extends Activity {
         debugSampleFile(sampleFilePath);
     }
 
-    public String sampleDateFmt() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH.mm");
+    public String sampleDateFmt(String dateFmt) {
+        SimpleDateFormat sdf = new SimpleDateFormat(dateFmt, Locale.US);
         return sdf.format(new Date());
     }
 
