@@ -92,7 +92,25 @@ public class MainActivity extends Activity {
             S.enable(false);
             System.out.println("Stopped");
             sampleUpdateDate(getSampleDate() + "-" + sampleDateFmt());
+            recordingShare();
         }
+    }
+
+    public void recordingShare() {
+        String sampleDateStr = getSampleDate();
+        System.out.printf("recordingShare: %s\n", sampleDateStr);
+        String sampleFilePath = makeSampleFilePath(sampleDateStr + ".json");
+        File sampleFile = makeSampleFile(sampleFilePath);
+        SRJSON json = new SRJSON();
+        try {
+            BufferedWriter fo = new BufferedWriter(new FileWriter(sampleFile));
+            json.dump(S, fo, sampleDateStr, SRCfg.interval);
+            fo.close();
+        } catch (Exception e) {
+            SRDbg.l("Couldn't write data to a file:" +  e.toString());
+        }
+        SRDbg.l("--- printing " + sampleFilePath + "---\n");
+        debugSampleFile(sampleFilePath);
     }
 
     public String sampleDateFmt() {
@@ -114,23 +132,6 @@ public class MainActivity extends Activity {
         // Set the date of the start
         TextView userDate = (TextView)findViewById(R.id.userDate);
         userDate.setText(str);
-    }
-
-    public void recordingShare(View view) {
-        String sampleDateStr = getSampleDate();
-        System.out.printf("recordingShare: %s\n", sampleDateStr);
-        String sampleFilePath = makeSampleFilePath(sampleDateStr + ".json");
-        File sampleFile = makeSampleFile(sampleFilePath);
-        SRJSON json = new SRJSON();
-        try {
-            BufferedWriter fo = new BufferedWriter(new FileWriter(sampleFile));
-            json.dump(S, fo, sampleDateStr, SRCfg.interval);
-            fo.close();
-        } catch (Exception e) {
-            SRDbg.l("Couldn't write data to a file:" +  e.toString());
-        }
-        SRDbg.l("--- printing " + sampleFilePath + "---\n");
-        debugSampleFile(sampleFilePath);
     }
 
     public long spaceAvailableMB() {
