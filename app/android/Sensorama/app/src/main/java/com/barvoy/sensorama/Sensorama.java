@@ -37,6 +37,7 @@ public class Sensorama {
             fo.write("       }\n");
             isFirst = false;
         }
+        points = new ArrayList<SRDataPointList>();
     }
 
     public boolean isEnabled()
