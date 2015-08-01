@@ -50,7 +50,7 @@ public class MainActivity extends Activity {
                 }
                 sampleNumber++;
             }
-        }, 0, 1000);
+        }, 0, SRCfg.interval);
     }
 
     @Override
@@ -124,7 +124,7 @@ public class MainActivity extends Activity {
         SRJSON json = new SRJSON();
         try {
             BufferedWriter fo = new BufferedWriter(new FileWriter(sampleFile));
-            json.dump(S, fo, sampleDateStr);
+            json.dump(S, fo, sampleDateStr, SRCfg.interval);
             fo.close();
         } catch (Exception e) {
             SRDbg.l("Couldn't write data to a file:" +  e.toString());
