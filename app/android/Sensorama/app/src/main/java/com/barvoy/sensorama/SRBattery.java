@@ -8,14 +8,16 @@ import android.content.IntentFilter;
 import android.os.BatteryManager;
 
 
-public class SRBattery extends BroadcastReceiver {
-    boolean batteryIsCharging;
-    boolean batteryUsbCharge;
-    boolean batteryAcCharge;
-    float batteryPercent;
+public class SRBattery {
+    private static Context context;
 
-    @Override
-    public void onReceive(Context context, Intent intent) {
+    public void capture(SRDataPointList list) {
+        boolean batteryIsCharging;
+        boolean batteryUsbCharge;
+        boolean batteryAcCharge;
+        float batteryPercent;
+
+        context = SRApp.getAppContext();
         IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
         Intent batteryStatus = context.registerReceiver(null, ifilter);
 
@@ -31,9 +33,8 @@ public class SRBattery extends BroadcastReceiver {
         int scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
 
         batteryPercent = level / (float)scale;
-    }
 
-    public void capture(SRDataPointList list) {
+
         SRDataPoint point = new SRDataPoint("bat", new Float[]{ batteryPercent } );
         SRDbg.l("bat:" + point.debugString());
         list.add(point);
