@@ -2,6 +2,9 @@ language: android
 jdk:
 - oraclejdk7
 - openjdk6
+android:
+  components:
+      - build-tools-21.1.2
 script:
 - cd app/android/Sensorama
 - ./gradlew
