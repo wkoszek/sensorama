@@ -28,4 +28,4 @@ before_script:
 
 script:
 - cd app/android/Sensorama
-- ./gradlew build connectedCheck
+- ./gradlew build -x lint connectedCheck
