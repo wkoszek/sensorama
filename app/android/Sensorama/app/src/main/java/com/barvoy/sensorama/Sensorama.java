@@ -3,6 +3,7 @@ package com.barvoy.sensorama;
 import android.app.Activity;
 
 import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.*;
 
 
@@ -28,9 +29,13 @@ public class Sensorama {
         points.add(list);
     }
 
-    public void dumpPoints(BufferedWriter fo) {
+    public void dumpPoints(BufferedWriter fo) throws IOException {
+        boolean isFirst = true;
         for (SRDataPointList list : points) {
+            fo.write("     " + (isFirst ? "" : ",") + "{");
             list.dump(fo);
+            fo.write("       }\n");
+            isFirst = false;
         }
     }
 

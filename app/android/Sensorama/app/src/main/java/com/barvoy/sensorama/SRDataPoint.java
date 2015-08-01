@@ -29,13 +29,13 @@ public class SRDataPoint {
         boolean isFirst;
 
         try {
-            fo.write("{ '%s' : [ " + prefix);
+            fo.write(String.format("    \"%s\" : [ ", prefix));
             isFirst = true;
             for (Float f : points) {
-                isFirst = false;
                 fo.write(String.format("%s%f", isFirst ? "" : ",", f));
+                isFirst = false;
             }
-            fo.write("] }\n");
+            fo.write("]");
         } catch (Exception e) {
             SRDbg.l("Got exception: " + e.toString());
         }

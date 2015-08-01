@@ -1,6 +1,7 @@
 package com.barvoy.sensorama;
 
 import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,9 +18,14 @@ public class SRDataPointList {
         sampleId++;
     }
 
-    public void dump(BufferedWriter fo) {
+    public void dump(BufferedWriter fo) throws IOException {
+        boolean isFirst = true;
         for (SRDataPoint point : dataPoints) {
+            if (!isFirst) {
+                fo.write(",");
+            }
             point.dump(fo);
+            isFirst = false;
         }
     }
 }

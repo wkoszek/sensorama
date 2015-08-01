@@ -10,9 +10,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Timer;
@@ -102,6 +105,11 @@ public class MainActivity extends Activity {
         return userDate.getText().toString();
     }
 
+    public String getSampleName() {
+        TextView userName = (TextView)findViewById(R.id.userName);
+        return userName.getText().toString();
+    }
+
     public void sampleUpdateDate(String str) {
         // Set the date of the start
         TextView userDate = (TextView)findViewById(R.id.userDate);
@@ -109,17 +117,20 @@ public class MainActivity extends Activity {
     }
 
     public void recordingShare(View view) {
-        // Do something in response to button
-        System.out.printf("recordingShare: %s\n", getSampleDate());
-        File sampleFile = makeSampleFile(getSampleDate() + ".json");
+        String sampleDateStr = getSampleDate();
+        System.out.printf("recordingShare: %s\n", sampleDateStr);
+        String sampleFilePath = makeSampleFilePath(sampleDateStr + ".json");
+        File sampleFile = makeSampleFile(sampleFilePath);
+        SRJSON json = new SRJSON();
         try {
             BufferedWriter fo = new BufferedWriter(new FileWriter(sampleFile));
-            fo.write("sampleDataContent");
-            S.dumpPoints(fo);
+            json.dump(S, fo, sampleDateStr);
             fo.close();
         } catch (Exception e) {
             SRDbg.l("Couldn't write data to a file:" +  e.toString());
         }
+        SRDbg.l("--- printing " + sampleFilePath + "---\n");
+        debugSampleFile(sampleFilePath);
     }
 
     public long spaceAvailableMB() {
@@ -163,9 +174,13 @@ public class MainActivity extends Activity {
         return dir.getAbsolutePath();
     }
 
-    public File makeSampleFile(String fileName) {
+    public String makeSampleFilePath(String fileName) {
         String sampleDirPath = makeSampleStorageDir(SRCfg.addDirName);
         String sampleFilePath = sampleDirPath + "/" + fileName;
+        return sampleFilePath;
+    }
+
+    public File makeSampleFile(String sampleFilePath) {
         File file = null;
         try {
             file = new File(sampleFilePath);
@@ -173,5 +188,23 @@ public class MainActivity extends Activity {
             SRDbg.l("Failed to create a file");
         }
         return file;
+    }
+
+    public void debugSampleFile(String fileName) {
+        File sampleFile = new File(fileName);
+        StringBuilder outStr = new StringBuilder();
+
+        try {
+            BufferedReader sampleFileReader = new BufferedReader(new FileReader(sampleFile));
+            String line = "";
+
+            while ((line = sampleFileReader.readLine()) != null) {
+                outStr.append(line + "\n");
+            }
+            sampleFileReader.close();
+        } catch (IOException e) {
+            SRDbg.l("Couldn't print sample file" + e.toString());
+        }
+        SRDbg.l(outStr.toString());
     }
 }
