@@ -1,6 +1,7 @@
 package com.barvoy.sensorama;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Environment;
 import android.os.StatFs;
 import android.os.Bundle;
@@ -32,8 +33,10 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SRDbg.debugEnable();
+        Button buttonStartEnd = (Button) findViewById(R.id.buttonStartEnd);
+        buttonStartEnd.setBackgroundColor(SRCfg.buttonColorInitial);
 
+        SRDbg.debugEnable();
         storageDebug();
 
         S = new Sensorama(this, false);
@@ -85,11 +88,13 @@ public class MainActivity extends Activity {
         String textStart = "Start recording";
         if (textCurrent.equals(textStart)) {
             buttonStartEnd.setText("Stop recording");
+            buttonStartEnd.setBackgroundColor(SRCfg.buttonColorStopped);
             S.enable(true);
             System.out.println("Started");
             sampleUpdateDate(sampleDateFmt(SRCfg.dateFormat));
         } else {
             buttonStartEnd.setText(textStart);
+            buttonStartEnd.setBackgroundColor(SRCfg.buttonColorStart);
             S.enable(false);
             System.out.println("Stopped");
             sampleUpdateDate(getSampleDate() + "-" + sampleDateFmt(SRCfg.timeFormat));
