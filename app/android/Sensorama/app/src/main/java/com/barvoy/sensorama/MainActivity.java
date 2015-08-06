@@ -113,7 +113,7 @@ public class MainActivity extends Activity {
         SRJSON json = new SRJSON();
         try {
             BufferedWriter fo = new BufferedWriter(new FileWriter(sampleFile));
-            json.dump(S, fo, sampleDateStr, SRCfg.interval, getDeviceName());
+            json.dump(S, fo, sampleDateStr, SRCfg.interval, getDeviceName(), getSampleName());
             fo.close();
         } catch (Exception e) {
             SRDbg.l("Couldn't write data to a file:" +  e.toString());
