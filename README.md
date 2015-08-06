@@ -6,10 +6,11 @@ understanding of real events from the sensor's place of origin.  For
 example, for the mobile cell phone which comes with an accelerometer and a
 gyroscope, when enough sensor data is collected and analyzed, it could be
 valuable to see if detection of activities such as jogging or playing drums
-is possible. Additional experiment could consist of a smart-phone attach to
-a drummers arm and Sensorama being able to understand patterns played by the
-musician.  Industrial sensor on the other hand may lead to conclusions about
-the state of machines such as CNC routers etc.
+is possible. Additional experiment could consist of a smart-phone attached
+to drummers arm and seeing Sensorama being able to understand patterns
+played by the musician.  Industrial sensor on the other hand may lead to
+conclusions about the state of machines such as CNC routers, robots on
+assembly line etc.
 
 Initial implementation of Sensorama is meant to be an exercise in mobile
 cross-platform mobile programming in Android and iOS ecosystems.
