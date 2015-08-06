@@ -23,6 +23,9 @@ import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import android.os.Build;
+
+
 public class MainActivity extends Activity {
 
     public Sensorama S;
@@ -110,7 +113,7 @@ public class MainActivity extends Activity {
         SRJSON json = new SRJSON();
         try {
             BufferedWriter fo = new BufferedWriter(new FileWriter(sampleFile));
-            json.dump(S, fo, sampleDateStr, SRCfg.interval);
+            json.dump(S, fo, sampleDateStr, SRCfg.interval, getDeviceName());
             fo.close();
         } catch (Exception e) {
             SRDbg.l("Couldn't write data to a file:" +  e.toString());
@@ -213,5 +216,28 @@ public class MainActivity extends Activity {
             SRDbg.l("Couldn't print sample file" + e.toString());
         }
         SRDbg.l(outStr.toString());
+    }
+
+    public String getDeviceName() {
+        String manufacturer = Build.MANUFACTURER;
+        String model = Build.MODEL;
+        if (model.startsWith(manufacturer)) {
+            return capitalize(model);
+        } else {
+            return capitalize(manufacturer) + " " + model;
+        }
+    }
+
+
+    private String capitalize(String s) {
+        if (s == null || s.length() == 0) {
+            return "";
+        }
+        char first = s.charAt(0);
+        if (Character.isUpperCase(first)) {
+            return s;
+        } else {
+            return Character.toUpperCase(first) + s.substring(1);
+        }
     }
 }
