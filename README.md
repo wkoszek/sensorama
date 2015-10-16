@@ -1,5 +1,7 @@
 # Sensorama
 
+[![Build Status](https://travis-ci.org/wkoszek/sensorama.svg?branch=master)](https://travis-ci.org/wkoszek/sensorama) 
+
 Sensorama is a data science platform. Its purpose is to see if the
 information gathered from modern sensors could be turned into an
 understanding of real events from the sensor's place of origin.  For
