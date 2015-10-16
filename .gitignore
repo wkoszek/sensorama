@@ -25,3 +25,6 @@ proguard/
 
 # Log Files
 *.log
+
+# Perm file.
+app/android/Sensorama/app/src/main/java/com/barvoy/sensorama/SRAPIPerms.java
