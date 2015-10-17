@@ -19,12 +19,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import android.os.Build;
-
+import com.parse.Parse;
+import com.parse.ParseObject;
+import com.parse.ParseAnalytics;
+import com.parse.ParseCrashReporting;
 
 public class MainActivity extends Activity {
 
@@ -38,6 +43,10 @@ public class MainActivity extends Activity {
 
         Button buttonStartEnd = (Button) findViewById(R.id.buttonStartEnd);
         buttonStartEnd.setBackgroundColor(SRCfg.buttonColorInitial);
+
+        if (SRCfg.doParseBootstrap) {
+		    parseBootstrap();
+        }
 
         SRDbg.debugEnable();
         storageDebug();
@@ -238,6 +247,39 @@ public class MainActivity extends Activity {
             return s;
         } else {
             return Character.toUpperCase(first) + s.substring(1);
+        }
+    }
+
+    private void parseBootstrap() {
+        try {
+            Thread.sleep(3000);
+        } catch(InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
+        ParseAnalytics.trackAppOpenedInBackground(getIntent());
+
+
+        for (int i = 0; i < 5; i++) {
+            System.out.print("XXX wrinting" + i);
+            ParseObject testObject = new ParseObject("TestObject");
+            testObject.put("foo", "bar");
+            testObject.saveInBackground();
+        }
+
+        Map<String, String> dimensions = new HashMap<String, String>();
+        // What type of news is this?
+        dimensions.put("category", "politics");
+        // Is it a weekday or the weekend?
+        dimensions.put("dayType", "weekday");
+        // Send the dimensions to Parse along with the 'read' event
+
+        ParseAnalytics.trackEventInBackground("read", dimensions);
+
+        boolean doTestCrashReporting = true;
+
+        if (SRCfg.doTestCrashReporting || doTestCrashReporting) {
+            System.out.print("Will crash app now");
+            throw new RuntimeException("Test Exception!");
         }
     }
 }
