@@ -1,5 +1,7 @@
 # Sensorama
 
+[![Build Status](https://travis-ci.org/wkoszek/sensorama.svg?branch=master)](https://travis-ci.org/wkoszek/sensorama)
+
 #### Android version
 
 For initializing the Parse API, you must register with Parse and provide 2
