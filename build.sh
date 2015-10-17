@@ -12,6 +12,16 @@ if [ "x${PARSE_CLIENT_ID}" = "x" ]; then
 	. ${HOME}/.parse_sensorama_cred
 fi
 
+LIB=app/android/Sensorama/app/libs
+mkdir -p $LIB
+mkdir -p _tmp
+(
+	cd _tmp
+	wget -O parse.zip https://www.parse.com/downloads/android/Parse/latest
+	unzip parse.zip
+	mv *.jar ../$LIB
+)
+
 F=app/android/Sensorama/app/src/main/java/com/barvoy/sensorama/SRAPIPerms.java
 cat $F | \
 	sed "s/PARSE_API_ID/${PARSE_API_ID}/" | \
