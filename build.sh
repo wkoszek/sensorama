@@ -18,8 +18,8 @@ mkdir -p _tmp
 (
 	cd _tmp
 	wget -O parse.zip https://www.parse.com/downloads/android/Parse/latest
-	unzip parse.zip
-	mv *.jar ../$LIB
+	unzip -o parse.zip
+	cp bolts-android*.jar Parse-*.jar ParseCrash*.jar ../$LIB
 )
 
 F=app/android/Sensorama/app/src/main/java/com/barvoy/sensorama/SRAPIPerms.java
