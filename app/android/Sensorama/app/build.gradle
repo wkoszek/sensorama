@@ -10,13 +10,42 @@ android {
 		targetSdkVersion 21
 		versionCode 1
 		versionName "1.0"
+
+		// ------------------------------------------------------------
+		def env = System.getenv()
+		def cfgFile = env["HOME"] + "/.parse_sensorama_cred"
+		def f = file(cfgFile);
+
+		def vals = [:]
+		if (f.isFile()) {
+			String data = f.getText('UTF-8')
+			println "# Found a project-specific config file!"
+			def valCount = 0
+			data.eachLine { lineStr ->
+				def toks = lineStr.split(/=/)
+				println "#  loading variable " + toks[0]
+				vals.put(toks[0], toks[1])
+				valCount += 1
+			}
+			println "# Total: " + valCount + " variables found"
+		}
+		if (vals.get("PARSE_API_ID") == null ||
+				(vals.get("PARSE_CLIENT_ID")) == null) {
+			println "API/CLIENT NOT FOUND!!!"
+		}
+
+		def api_id = vals.get("PARSE_API_ID")
+		buildConfigField "String", "PARSE_API_ID",
+				api_id ? ( "\"" + api_id + "\"" ) : "\"<API_ID_HERE>\""
+		def client_id = vals.get("PARSE_CLIENT_ID")
+		buildConfigField "String", "PARSE_CLIENT_ID",
+				client_id ? ( "\"" + client_id + "\"" ) : "\"<CLIENT_ID_HERE>\""
 	}
+
 	buildTypes {
 		release {
 			minifyEnabled false
 			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-		}
-		debug {
 		}
 	}
 }
