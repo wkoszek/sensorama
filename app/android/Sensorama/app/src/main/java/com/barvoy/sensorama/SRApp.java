@@ -2,15 +2,13 @@
 // All rights reserved.
 
 package com.barvoy.sensorama;
-
+import com.barvoy.sensorama.BuildConfig;
 
 import android.app.Application;
 import android.content.Context;
 
 import com.parse.Parse;
-import com.parse.ParseAnalytics;
 import com.parse.ParseCrashReporting;
-import com.barvoy.sensorama.SRAPIPerms;
 
 public class SRApp extends Application {
     private static Context context;
@@ -21,8 +19,8 @@ public class SRApp extends Application {
 
         Parse.enableLocalDatastore(this);
         Parse.initialize(this,
-                SRAPIPerms.parseAPIID,
-                SRAPIPerms.parseCLIID
+                BuildConfig.PARSE_API_ID,
+                BuildConfig.PARSE_API_ID
         );
         SRApp.context = getApplicationContext();
     }
