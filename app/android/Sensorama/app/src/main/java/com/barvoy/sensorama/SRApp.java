@@ -20,7 +20,7 @@ public class SRApp extends Application {
         Parse.enableLocalDatastore(this);
         Parse.initialize(this,
                 BuildConfig.PARSE_API_ID,
-                BuildConfig.PARSE_API_ID
+                BuildConfig.PARSE_CLIENT_ID
         );
         SRApp.context = getApplicationContext();
     }
