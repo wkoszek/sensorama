@@ -261,8 +261,9 @@ public class MainActivity extends Activity {
         }
         ParseAnalytics.trackAppOpenedInBackground(getIntent());
 
+        Parse.setLogLevel(Parse.LOG_LEVEL_DEBUG);
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 1; i++) {
             System.out.print("XXX wrinting" + i);
             ParseObject testObject = new ParseObject("TestObject");
             testObject.put("foo", "bar");
