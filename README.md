@@ -15,6 +15,10 @@ To build the application, run:
 
 	./build.sh
 
+# Integration with external services
+
+app/android/Sensorama/app/fabric.properties
+
 
 # Author
 

@@ -7,14 +7,17 @@ import com.barvoy.sensorama.BuildConfig;
 import android.app.Application;
 import android.content.Context;
 
+import com.crashlytics.android.Crashlytics;
 import com.parse.Parse;
 import com.parse.ParseCrashReporting;
+import io.fabric.sdk.android.Fabric;
 
 public class SRApp extends Application {
     private static Context context;
 
     public void onCreate(){
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
         ParseCrashReporting.enable(this);
 
         Parse.enableLocalDatastore(this);

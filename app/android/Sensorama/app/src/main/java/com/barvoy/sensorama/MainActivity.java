@@ -72,6 +72,11 @@ public class MainActivity extends Activity {
         }, 0, SRCfg.interval);
     }
 
+    public void forceCrash(View view) {
+        throw new RuntimeException("This is a crash");
+    }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
