@@ -3,6 +3,7 @@ all: usage
 LIB=app/android/Sensorama/app/libs
 
 check:
+	ls -la
 	cd app/android/Sensorama
 	./gradlew build -x lint $@ | cat
 
