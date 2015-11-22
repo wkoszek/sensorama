@@ -31,3 +31,6 @@ app/android/Sensorama/app/src/main/java/com/barvoy/sensorama/SRAPIPerms.java
 
 # .img crap
 **/*.iml
+
+# Skip the Fabric API key
+app/android/Sensorama/app/fabric.properties
