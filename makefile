@@ -5,6 +5,7 @@ LIB=app/android/Sensorama/app/libs
 check:
 	ls -la
 	cd app/android/Sensorama
+	ls -la
 	./gradlew build -x lint $@ | cat
 
 rel:
