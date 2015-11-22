@@ -283,12 +283,5 @@ public class MainActivity extends Activity {
         // Send the dimensions to Parse along with the 'read' event
 
         ParseAnalytics.trackEventInBackground("read", dimensions);
-
-        boolean doTestCrashReporting = true;
-
-        if (SRCfg.doTestCrashReporting || doTestCrashReporting) {
-            System.out.print("Will crash app now");
-            throw new RuntimeException("Test Exception!");
-        }
     }
 }
