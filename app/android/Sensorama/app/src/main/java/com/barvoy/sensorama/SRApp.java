@@ -18,7 +18,6 @@ public class SRApp extends Application {
     public void onCreate(){
         super.onCreate();
         Fabric.with(this, new Crashlytics());
-        ParseCrashReporting.enable(this);
 
         Parse.enableLocalDatastore(this);
         Parse.initialize(this,
