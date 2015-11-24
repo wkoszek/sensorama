@@ -21,7 +21,7 @@ public class Sensorama {
     List<SRDataPointList> points;
     boolean enabled;
 
-    public Sensorama(Activity activity, boolean debuggingEnabled)
+    public Sensorama(Activity activity)
     {
         SRDbg.debugEnable();
         points = new ArrayList<SRDataPointList>();

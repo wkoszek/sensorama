@@ -56,7 +56,7 @@ public class MainActivity extends Activity {
         SRDbg.debugEnable();
         storageDebug();
 
-        S = new Sensorama(this, false);
+        S = new Sensorama(this);
 
         sampleUpdateDate(sampleDateFmt(SRCfg.dateFormat) + "...");
 
