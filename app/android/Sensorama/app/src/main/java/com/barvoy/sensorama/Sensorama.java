@@ -14,6 +14,7 @@ public class Sensorama {
     SRAccel accel;
     SRBattery battery;
     SRGyro gyro;
+    SRGravity gravity;
 
     List<SRDataPointList> points;
     boolean enabled;
@@ -24,6 +25,7 @@ public class Sensorama {
         points = new ArrayList<SRDataPointList>();
         accel = new SRAccel(activity);
         gyro = new SRGyro(activity);
+        gravity = new SRGravity(activity);
         battery = new SRBattery();
     }
 
@@ -32,6 +34,7 @@ public class Sensorama {
         battery.capture(list);
         accel.capture(list);
         gyro.capture(list);
+        gravity.capture(list);
         points.add(list);
     }
 
