@@ -13,6 +13,7 @@ import java.util.*;
 public class Sensorama {
     SRAccel accel;
     SRBattery battery;
+    SRGyro gyro;
 
     List<SRDataPointList> points;
     boolean enabled;
@@ -22,6 +23,7 @@ public class Sensorama {
         SRDbg.debugEnable();
         points = new ArrayList<SRDataPointList>();
         accel = new SRAccel(activity);
+        gyro = new SRGyro(activity);
         battery = new SRBattery();
     }
 
@@ -29,6 +31,7 @@ public class Sensorama {
         SRDataPointList list = new SRDataPointList();
         battery.capture(list);
         accel.capture(list);
+        gyro.capture(list);
         points.add(list);
     }
 
