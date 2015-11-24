@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -30,6 +31,7 @@ import java.util.TimerTask;
 
 import android.os.Build;
 import com.parse.Parse;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseAnalytics;
 import com.parse.ParseCrashReporting;
@@ -124,19 +126,56 @@ public class MainActivity extends Activity {
 
     public void recordingShare() {
         String sampleDateStr = getSampleDate();
-        System.out.printf("recordingShare: %s\n", sampleDateStr);
-        String sampleFilePath = makeSampleFilePath(sampleDateStr + ".json");
+        String sampleFileName = sampleDateStr + ".json";
+        System.out.printf("recordingShare: %s\n", sampleFileName);
+        String sampleFilePath = makeSampleFilePath(sampleFileName);
         File sampleFile = makeSampleFile(sampleFilePath);
         SRJSON json = new SRJSON();
         try {
             BufferedWriter fo = new BufferedWriter(new FileWriter(sampleFile));
             json.dump(S, fo, sampleDateStr, SRCfg.interval, getDeviceName(), getSampleName());
             fo.close();
+            sampleFileExport(sampleFileName, sampleFilePath);
         } catch (Exception e) {
             SRDbg.l("Couldn't write data to a file:" +  e.toString());
         }
         SRDbg.l("--- printing " + sampleFilePath + "---\n");
         debugSampleFile(sampleFilePath);
+    }
+
+    public void sampleFileExport(String fileName, String filePath) {
+        String lineStr;
+        String fileContent = "";
+
+        System.out.println("XXX exporting file");
+
+        try {
+            FileReader fileReader = new FileReader(filePath);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+            while((lineStr = bufferedReader.readLine()) != null) {
+                fileContent += lineStr + "\n";
+            }
+            bufferedReader.close();
+
+        } catch(FileNotFoundException ex) {
+            System.out.println("Unable to open a file '" + fileName + "'");
+        } catch(IOException ex) {
+            System.out.println("Error reading a file '" + fileName + "'");
+        }
+
+        System.out.println("XXX output file: " + fileName);
+        System.out.println("XXX will export " + fileContent);
+
+        byte[] data = fileContent.getBytes();
+        ParseFile file = new ParseFile(fileName, data);
+
+        file.saveInBackground();
+        
+        ParseObject jobApplication = new ParseObject("SensoramaFile");
+        jobApplication.put("fileName", fileName);
+        jobApplication.put("sampleFile", file);
+        jobApplication.saveInBackground();
     }
 
     public String sampleDateFmt(String dateFmt) {
