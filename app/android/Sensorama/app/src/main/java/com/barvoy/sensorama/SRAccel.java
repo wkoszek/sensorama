@@ -12,7 +12,6 @@ import android.hardware.SensorManager;
 public class SRAccel extends Activity implements SensorEventListener {
     private final SensorManager mSensorManager;
     private final Sensor mAccelerometer;
-    Activity activity;
     float []vals = { 0, 0, 0 };
 
     public SRAccel(Activity activity) {
