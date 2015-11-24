@@ -11,18 +11,18 @@ import android.hardware.SensorManager;
 
 public class SRGravity extends Activity implements SensorEventListener {
     private final SensorManager mSensorManager;
-    private final Sensor mGyro;
+    private final Sensor mGravity;
     float []vals = { 0, 0, 0 };
 
     public SRGravity(Activity activity) {
         mSensorManager = (SensorManager)activity.getSystemService(SENSOR_SERVICE);
-        mGyro = mSensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
-        mSensorManager.registerListener(this, mGyro, SensorManager.SENSOR_DELAY_GAME);
+        mGravity = mSensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
+        mSensorManager.registerListener(this, mGravity, SensorManager.SENSOR_DELAY_GAME);
     }
 
     protected void onResume() {
         super.onResume();
-        mSensorManager.registerListener(this, mGyro, SensorManager.SENSOR_DELAY_NORMAL);
+        mSensorManager.registerListener(this, mGravity, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     protected void onPause() {
