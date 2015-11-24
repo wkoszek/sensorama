@@ -12,4 +12,7 @@ public class SRCfg {
     public static final int buttonColorStart = 0xff00ff00;      // green
     public static final int buttonColorInitial = buttonColorStart;
     public static final boolean doParseBootstrap = true;
+
+    public static final boolean doPressureMonitoring = false;
+
 }
