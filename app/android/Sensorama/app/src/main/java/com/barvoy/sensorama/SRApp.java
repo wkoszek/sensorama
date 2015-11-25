@@ -9,7 +9,6 @@ import android.content.Context;
 
 import com.crashlytics.android.Crashlytics;
 import com.parse.Parse;
-import com.parse.ParseCrashReporting;
 import io.fabric.sdk.android.Fabric;
 
 public class SRApp extends Application {
