@@ -48,7 +48,7 @@ public class Sensorama {
     public void dumpPoints(BufferedWriter fo) throws IOException {
         boolean isFirst = true;
         for (SRDataPointList list : points) {
-            fo.write("     " + (isFirst ? "" : ",") + "{");
+            fo.write("     " + (isFirst ? " " : ",") + "{");
             list.dump(fo);
             fo.write("       }\n");
             isFirst = false;
