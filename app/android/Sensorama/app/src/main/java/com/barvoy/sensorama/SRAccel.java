@@ -18,6 +18,8 @@ public class SRAccel extends Activity implements SensorEventListener {
         mSensorManager = (SensorManager)activity.getSystemService(SENSOR_SERVICE);
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_GAME);
+
+        SRCfg.sensorList = mSensorManager.getSensorList(Sensor.TYPE_ALL);
     }
 
     protected void onResume() {

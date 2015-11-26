@@ -3,6 +3,9 @@
 
 package com.barvoy.sensorama;
 
+import android.hardware.Sensor;
+import java.util.List;
+
 public class SRCfg {
     public static final String addDirName = "sensorama";
     public static final int interval = 250;
@@ -15,4 +18,7 @@ public class SRCfg {
 
     public static final boolean doPressureMonitoring = false;
 
+    // Public data. Should land somewhere else maybe.
+    public static List<Sensor> sensorList;
+    public static String deviceName;
 }

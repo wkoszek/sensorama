@@ -170,6 +170,7 @@ public class MainActivity extends Activity {
         ParseObject jobApplication = new ParseObject("SensoramaFile");
         jobApplication.put("fileName", fileName);
         jobApplication.put("sampleFile", file);
+        jobApplication.put("devname", SRCfg.deviceName);
         jobApplication.saveInBackground();
     }
 
