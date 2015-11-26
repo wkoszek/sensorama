@@ -147,8 +147,6 @@ public class MainActivity extends Activity {
         String lineStr;
         String fileContent = "";
 
-        System.out.println("XXX exporting file");
-
         try {
             FileReader fileReader = new FileReader(filePath);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -163,9 +161,6 @@ public class MainActivity extends Activity {
         } catch(IOException ex) {
             System.out.println("Error reading a file '" + fileName + "'");
         }
-
-        System.out.println("XXX output file: " + fileName);
-        System.out.println("XXX will export " + fileContent);
 
         byte[] data = fileContent.getBytes();
         ParseFile file = new ParseFile(fileName, data);
