@@ -46,6 +46,8 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Locale.setDefault(new Locale("en", "US"));
+
         Button buttonStartEnd = (Button) findViewById(R.id.buttonStartEnd);
         buttonStartEnd.setBackgroundColor(SRCfg.buttonColorInitial);
 
