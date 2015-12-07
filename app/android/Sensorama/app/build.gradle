@@ -23,8 +23,11 @@ android {
 		applicationId "com.barvoy.sensorama"
 		minSdkVersion 15
 		targetSdkVersion 21
-		versionCode 4
-		versionName "4"
+
+		def fver = file("../../../../VERSION")
+		def verString = fver.getText('UTF-8').trim()
+		versionName verString
+		versionCode verString.toInteger()
 
 		// ------------------------------------------------------------
 		def env = System.getenv()
