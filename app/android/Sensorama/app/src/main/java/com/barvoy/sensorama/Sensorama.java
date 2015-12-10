@@ -23,7 +23,6 @@ public class Sensorama {
 
     public Sensorama(Activity activity)
     {
-        SRDbg.debugEnable();
         points = new ArrayList<SRDataPointList>();
         accel = new SRAccel(activity);
         gyro = new SRGyro(activity);

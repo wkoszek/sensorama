@@ -63,7 +63,7 @@ public class SREnviron extends Activity implements SensorEventListener {
             System.out.println("Unknown event!");
             return;
         }
-        System.out.println("vi = " + vi);
+        SRDbg.l("vi = " + vi);
         vals[vi] = event.values[0];
     }
 

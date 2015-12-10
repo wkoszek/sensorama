@@ -55,7 +55,6 @@ public class MainActivity extends Activity {
 		    parseBootstrap();
         }
 
-        SRDbg.debugEnable();
         storageDebug();
 
         S = new Sensorama(this);
@@ -137,13 +136,13 @@ public class MainActivity extends Activity {
             fo.close();
             sampleFileExport(sampleFileName, sampleFilePath);
         } catch (Exception e) {
-            SRDbg.l("Couldn't write data to a file:" +  e.toString());
+            SRDbg.l("Couldn't write data to a file:" + e.toString());
         }
         SRDbg.l("--- printing " + sampleFilePath + "---\n");
         debugSampleFile(sampleFilePath);
     }
 
-    public void sampleFileExport(String fileName, String filePath) {
+    public String sampleFileGetContent(String filePath) {
         String lineStr;
         String fileContent = "";
 
@@ -157,11 +156,15 @@ public class MainActivity extends Activity {
             bufferedReader.close();
 
         } catch(FileNotFoundException ex) {
-            System.out.println("Unable to open a file '" + fileName + "'");
+            System.out.println("Unable to open a file '" + filePath + "'");
         } catch(IOException ex) {
-            System.out.println("Error reading a file '" + fileName + "'");
+            System.out.println("Error reading a file '" + filePath + "'");
         }
+        return fileContent;
+    }
 
+    public void sampleFileExport(String fileName, String filePath) {
+        String fileContent = sampleFileGetContent(filePath);
         byte[] data = fileContent.getBytes();
         ParseFile file = new ParseFile(fileName, data);
 
@@ -253,21 +256,10 @@ public class MainActivity extends Activity {
     }
 
     public void debugSampleFile(String fileName) {
-        File sampleFile = new File(fileName);
-        StringBuilder outStr = new StringBuilder();
-
-        try {
-            BufferedReader sampleFileReader = new BufferedReader(new FileReader(sampleFile));
-            String line = "";
-
-            while ((line = sampleFileReader.readLine()) != null) {
-                outStr.append(line + "\n");
-            }
-            sampleFileReader.close();
-        } catch (IOException e) {
-            SRDbg.l("Couldn't print sample file" + e.toString());
+        if (true || SRCfg.doDebug) {
+            String fileContent = sampleFileGetContent(fileName);
+            SRDbg.l(fileContent);
         }
-        SRDbg.l(outStr.toString());
     }
 
     public String getDeviceName() {
