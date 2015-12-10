@@ -66,8 +66,6 @@ public class MainActivity extends Activity {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                System.out.printf("en:%d %d", S.isEnabled() ? 1 : 0, sampleNumber);
-                System.out.println("");
                 if (S.isEnabled()) {
                     S.capture();
                 }
