@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -39,7 +40,7 @@ import com.parse.ParseCrashReporting;
 public class MainActivity extends Activity {
 
     public Sensorama S;
-    public int sampleNumber;
+    static public int sampleNumber;
 
     @Override
     public final void onCreate(Bundle savedInstanceState) {
@@ -67,8 +68,8 @@ public class MainActivity extends Activity {
             public void run() {
                 if (S.isEnabled()) {
                     S.capture();
+                    sampleNumber++;
                 }
-                sampleNumber++;
             }
         }, 0, SRCfg.interval);
     }
@@ -110,6 +111,8 @@ public class MainActivity extends Activity {
         if (textCurrent.equals(textStart)) {
             buttonStartEnd.setText("Stop recording");
             buttonStartEnd.setBackgroundColor(SRCfg.buttonColorStopped);
+            sampleNumber = 0;
+            counterUpdate();
             S.enable(true);
             System.out.println("Started");
             sampleUpdateDate(sampleDateFmt(SRCfg.dateFormat));
@@ -117,10 +120,17 @@ public class MainActivity extends Activity {
             buttonStartEnd.setText(textStart);
             buttonStartEnd.setBackgroundColor(SRCfg.buttonColorStart);
             S.enable(false);
+            counterUpdate();
             System.out.println("Stopped");
             sampleUpdateDate(getSampleDate() + "-" + sampleDateFmt(SRCfg.timeFormat));
             recordingShare();
         }
+    }
+
+    public void counterUpdate() {
+        TextView sampleCounter = (TextView)findViewById(R.id.sampleCounter);
+        System.out.println("Sample number: " + sampleNumber);
+        sampleCounter.setText("" + sampleNumber);
     }
 
     public void recordingShare() {
