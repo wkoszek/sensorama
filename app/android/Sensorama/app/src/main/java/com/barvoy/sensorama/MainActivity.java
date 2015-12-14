@@ -178,6 +178,9 @@ public class MainActivity extends Activity {
         byte[] data = fileContent.getBytes();
         ParseFile file = new ParseFile(fileName, data);
 
+        TextView fileSize = (TextView) findViewById(R.id.fileSize);
+        fileSize.setText("" + fileContent.length());
+
         file.saveInBackground();
         
         ParseObject jobApplication = new ParseObject("SensoramaFile");
@@ -266,7 +269,7 @@ public class MainActivity extends Activity {
     }
 
     public void debugSampleFile(String fileName) {
-        if (true || SRCfg.doDebug) {
+        if (SRCfg.doDebug) {
             String fileContent = sampleFileGetContent(fileName);
             SRDbg.l(fileContent);
         }
