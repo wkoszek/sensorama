@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Sensorama"
-            android:id="@+id/appName"
+            android:id="@+id/labelAppName"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
 
@@ -41,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Description"
-            android:id="@+id/textView2" />
+            android:id="@+id/labelDescription" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -49,7 +49,7 @@
             android:inputType="textPersonName"
             android:ems="10"
             android:id="@+id/userName"
-            android:layout_below="@+id/appName"
+            android:layout_below="@+id/labelAppName"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentLeft="true"
@@ -59,7 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Filename"
-            android:id="@+id/textView" />
+            android:id="@+id/labelFilename" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -76,7 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Samples count"
-            android:id="@+id/textView3" />
+            android:id="@+id/labelSamplesCount" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -89,7 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="File size"
-            android:id="@+id/fileSize" />
+            android:id="@+id/labelFilesize" />
 
         <TextView
             android:layout_width="wrap_content"

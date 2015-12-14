@@ -178,7 +178,7 @@ public class MainActivity extends Activity {
         byte[] data = fileContent.getBytes();
         ParseFile file = new ParseFile(fileName, data);
 
-        TextView fileSize = (TextView) findViewById(R.id.fileSize);
+        TextView fileSize = (TextView) findViewById(R.id.sampleSize);
         fileSize.setText("" + fileContent.length());
 
         file.saveInBackground();
