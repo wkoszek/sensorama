@@ -6,58 +6,89 @@
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
     android:background="@android:color/background_light">
 
-    <Button
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="Force Crash!"
-        android:onClick="forceCrash"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Start recording"
-        android:id="@+id/buttonStartEnd"
-        android:background="@android:color/holo_green_dark"
-	android:onClick="recordingStartEnd"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="115dp"
-        android:layout_alignRight="@+id/userDate"
-        android:layout_alignEnd="@+id/userDate"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></TableRow>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/userName"
-        android:layout_below="@+id/appName"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Sensorama"
+            android:id="@+id/appName"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Sensorama"
-        android:id="@+id/appName"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start recording"
+            android:id="@+id/buttonStartEnd"
+            android:background="@android:color/holo_green_dark"
+        android:onClick="recordingStartEnd"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="115dp"
+            android:layout_alignRight="@+id/userDate"
+            android:layout_alignEnd="@+id/userDate"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/userDate"
-        android:layout_below="@+id/userName"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/userName"
-        android:layout_alignEnd="@+id/userName" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            android:id="@+id/textView2" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/userName"
+            android:layout_below="@+id/appName"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Filename"
+            android:id="@+id/textView" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/userDate"
+            android:layout_below="@+id/userName"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignRight="@+id/userName"
+            android:layout_alignEnd="@+id/userName" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Numer of Samples: 0"
+            android:id="@+id/textView3" />
+
+        <Space
+            android:layout_width="20px"
+            android:layout_height="86dp" />
+
+        <Button
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Force Crash!"
+            android:onClick="forceCrash"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+    </TableLayout>
 
 </RelativeLayout>
