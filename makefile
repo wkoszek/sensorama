@@ -6,8 +6,9 @@ check:
 	(cd app/android/Sensorama && ./gradlew build -x lint $@) | cat
 
 rel:
-	cd app/android/Sensorama
-	./gradlew build -x lint $@ | cat
+	(cd app/android/Sensorama && ./gradlew build -x lint $@ | cat)
+up:
+	(cd app/android/Sensorama && gradle assembleRelease crashlyticsUploadDistributionRelease)
 fetch:
 	mkdir -p $(LIB) _tmp
 	wget -O _tmp/parse.zip https://www.parse.com/downloads/android/Parse/latest

@@ -14,7 +14,6 @@ repositories {
 	maven { url 'https://maven.fabric.io/public' }
 }
 
-
 android {
 	compileSdkVersion 21
 	buildToolsVersion "21.1.2"
@@ -24,12 +23,13 @@ android {
 		minSdkVersion 15
 		targetSdkVersion 21
 
+		// Release engineering
 		def fver = file("../../../../VERSION")
 		def verString = fver.getText('UTF-8').trim()
 		versionName verString
 		versionCode verString.toInteger()
 
-		// ------------------------------------------------------------
+		// Parse API stuff.
 		def env = System.getenv()
 		def cfgFile = env["HOME"] + "/.parse_sensorama_cred"
 		def f = file(cfgFile);
@@ -58,14 +58,38 @@ android {
 		def client_id = vals.get("PARSE_CLIENT_ID")
 		buildConfigField "String", "PARSE_CLIENT_ID",
 				client_id ? ( "\"" + client_id + "\"" ) : "\"<CLIENT_ID_HERE>\""
+
+		// HOME
+		def home = env["HOME"]
+
+		// Google Play
+		project.ext.set("google_storeFile", home + "/" + vals.get("google_storeFile"))
+		project.ext.set("google_storePassword", vals.get("google_storePassword"))
+		project.ext.set("google_keyAlias", vals.get("google_keyAlias"))
+		project.ext.set("google_keyPassword", vals.get("google_keyPassword"))
+	}
+
+
+	signingConfigs {
+		release {
+			storeFile	file(project.google_storeFile)
+			storePassword	project.google_storePassword
+			keyAlias	project.google_keyAlias
+			keyPassword	project.google_keyPassword
+		}
 	}
 
 	buildTypes {
 		release {
+			signingConfig signingConfigs.release
 			minifyEnabled false
 			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+			// Crashlytics Beta
+			ext.betaDistributionGroupAliases="sensorama-testers"
 		}
 	}
+
 }
 
 dependencies {
