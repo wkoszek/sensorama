@@ -24,9 +24,11 @@ before_script:
   - cd etc
   - openssl aes-256-cbc -K $encrypted_b0b0af8941b5_key -iv $encrypted_b0b0af8941b5_iv -in fabric.properties.enc -out fabric.properties -d
   - openssl aes-256-cbc -K $encrypted_b0b0af8941b5_key -iv $encrypted_b0b0af8941b5_iv -in googleplay.keystore.jks.enc -out googleplay.keystore.jks -d
+  - openssl aes-256-cbc -K $encrypted_b0b0af8941b5_key -iv $encrypted_b0b0af8941b5_iv -in parse_sensorama_cred.enc -out parse_sensorama_cred -d
   - cd ..
   - cp etc/fabric.properties app/android/Sensorama/app/fabric.properties
   - cp etc/googleplay.keystore.jks ~/.googleplay.keystore.jks
+  - cp etc/parse_sensorama_cred.enc ~/.parse_sensorama_cred
 
 script:
 #- make startsim
