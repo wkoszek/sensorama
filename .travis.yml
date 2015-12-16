@@ -23,10 +23,13 @@ android:
 before_script:
   - cd etc
   - openssl aes-256-cbc -K $encrypted_b0b0af8941b5_key -iv $encrypted_b0b0af8941b5_iv -in fabric.properties.enc -out fabric.properties -d
+  - openssl aes-256-cbc -K $encrypted_b0b0af8941b5_key -iv $encrypted_b0b0af8941b5_iv -in googleplay.keystore.jks.enc -out googleplay.keystore.jks -d
   - cd ..
   - cp etc/fabric.properties app/android/Sensorama/app/fabric.properties
+  - cp etc/googleplay.keystore.jks ~/.googleplay.keystore.jks
 
 script:
 #- make startsim
 #- make fetch
 - make check
+- make up
