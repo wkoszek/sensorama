@@ -28,7 +28,7 @@ before_script:
   - cd ..
   - cp etc/fabric.properties app/android/Sensorama/app/fabric.properties
   - cp etc/googleplay.keystore.jks ~/.googleplay.keystore.jks
-  - cp etc/parse_sensorama_cred.enc ~/.parse_sensorama_cred
+  - cp etc/parse_sensorama_cred ~/.parse_sensorama_cred
 
 script:
 #- make startsim
