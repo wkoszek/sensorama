@@ -29,6 +29,8 @@ android {
 		versionName verString
 		versionCode verString.toInteger()
 
+		project.ext.set("releaseNotesPath", "../../../relnotes/" + verString + ".md")
+
 		// Parse API stuff.
 		def env = System.getenv()
 		def cfgFile = env["HOME"] + "/.parse_sensorama_cred"
@@ -87,6 +89,7 @@ android {
 
 			// Crashlytics Beta
 			ext.betaDistributionGroupAliases="sensorama-testers"
+			ext.betaDistributionReleaseNotesFilePath=project.releaseNotesPath;
 		}
 	}
 
