@@ -2,11 +2,13 @@ all: usage
 
 LIB=app/android/Sensorama/app/libs
 
+#GRADLEFLAGS=-info --stacktrace
+
 check:
 	(cd app/android/Sensorama && ./gradlew build -x lint $@) | cat
 
 rel:
-	(cd app/android/Sensorama && ./gradlew build -x lint $@ | cat)
+	(cd app/android/Sensorama && ./gradlew build $(GRADLEFLAGS) -x lint | cat)
 up:
 	(cd app/android/Sensorama && gradle assembleRelease crashlyticsUploadDistributionRelease)
 fetch:

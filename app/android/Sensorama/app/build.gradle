@@ -29,7 +29,12 @@ android {
 		versionName verString
 		versionCode verString.toInteger()
 
-		project.ext.set("releaseNotesPath", "../../../relnotes/" + verString + ".md")
+		def relNotePath = "../../../relnotes/" + verString + ".md"
+		def relNote = new File(relNotePath)
+		if (!relNote.exists()) {
+			throw new GradleException('The release  not file doesnt exist. Make ' + relNotePath)
+		}
+		project.ext.set("releaseNotesPath", relNotePath)
 
 		// Parse API stuff.
 		def env = System.getenv()
